@@ -28,6 +28,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.titlesArray = [NSArray arrayWithObjects:@"Getting started with WordPress",
+                        @"Whitespace in Web Design: What It Is and Why You Should Use It",
+                        @"Adaptive Images and Responsive SVGs - Treehouse Show Episode 15",
+                        @"Productivity is About Constraints and Concentration",
+                        @"A Guide to Becoming the Smartest Developer on the Planet",
+                        @"Teacher Spotlight: Zac Gordon",
+                        @"Do You Love What You Do?",
+                        @"Applying Normalize.css Reset - Quick Tip",
+                        @"How I Wrote a Book in 3 Days",
+                        @"Responsive Techniques, JavaScript MVC Frameworks, Firefox 16 | Treehouse Show Episode 14", nil];
     
 }
 
@@ -42,20 +52,23 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [[self.fetchedResultsController sections] count];
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
-    return [sectionInfo numberOfObjects];
+    return [self.titlesArray count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"
+                                                            forIndexPath:indexPath];
     [self configureCell:cell atIndexPath:indexPath];
     return cell;
+        NSArray * booksArray = [NSArray arrayWithObjects:@"Hamlet",@"King Lear",@"Othello",@"Mabeth",nil];
+    NSString * bookTitle = [booksArray[2] uppercaseString];
+    [bookTitle uppercaseString];
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -174,8 +187,8 @@
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-    NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text = [[object valueForKey:@"timeStamp"] description];
+    NSManagedObject *object = self.titlesArray[indexPath.row];
+    cell.textLabel.text = [object description];
 }
 
 @end
